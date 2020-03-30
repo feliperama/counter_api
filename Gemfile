@@ -18,6 +18,8 @@ gem 'uglifier', '>= 1.3.0'
 
 # Authentication
 gem 'devise'
+gem 'jwt'
+gem 'rack-cors'
 
 # Requests
 gem 'http'
