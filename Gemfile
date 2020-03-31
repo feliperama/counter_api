@@ -16,6 +16,9 @@ gem 'uglifier', '>= 1.3.0'
 # See https://github.com/rails/execjs#readme for more supported runtimes
 # gem 'mini_racer', platforms: :ruby
 
+# Authentication
+gem 'devise'
+
 # Requests
 gem 'http'
 gem 'httparty'
@@ -61,6 +64,7 @@ group :development do
   gem 'annotate'
   gem 'better_errors'
   gem 'rails_layout'
+  gem 'pry-rails'
 end
 
 
