@@ -4,18 +4,21 @@ class User < ApplicationRecord
   devise :database_authenticatable, :registerable,
     :recoverable, :rememberable, :validatable
 
-  def decode_token(token)
-    payload = JWT.decode(token, ENV['JWT_SECRET'], true, algorithm: 'HS256').first
+  class << self
+    def by_token(token)
+      payload = decode_token(token)
+      return if payload['user_id'].nil?
 
-    expires_at = payload['expires_at'].to_datetime
-
-    if expires_at < Time.current
-      raise "Token #{token} has expired at #{expires_at}"
-    elsif payload["user_id"].nil? || payload["user_id"] != self.id
-      raise "Token user_id invalid"
+      find(payload['user_id']) if payload['expires_at'].to_datetime >= Time.current
+    rescue JWT::DecodeError
+      nil
     end
 
-    payload
+    def decode_token(token)
+      JWT.decode(token, ENV['JWT_SECRET'], true, algorithm: 'HS256').first
+    end
+
+    alias find_by_token by_token
   end
 
   def generate_token
