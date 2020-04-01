@@ -1,0 +1,55 @@
+<h1>Counter API</h1>
+
+<% unless current_user %>
+  The objective of this interface is allow you to register a new email and got new token to be used in your API.
+  <br>
+  Choose one of the options bellow:
+  <p></p>
+  <%= link_to "Sign in", 'users/sign_in' %> to enter with your registered email.
+  <p></p>
+  <%= link_to "Sign Up", 'users/sign_up' %> to register a new email or password. 
+  <p></p>
+  <%= link_to "Sign in with Facebook", user_facebook_omniauth_authorize_path %>
+<% else %>
+  You are currently registered as a new user!
+  <p></p>
+  <table class="table">
+    <thead>
+      <tr>
+        <th scope="col"></th>
+        <th scope="col">value</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <th scope="row">Your user email</th>
+        <td><%= current_user.email %></td>
+      </tr>
+      <tr>
+        <th scope="row">Token</th>
+        <td><%= @new_token %></td>
+      </tr>
+      <tr>
+        <th scope="row">Get the next integer in the sequence:</th>
+        <td>curl https://cherry-sundae-20794.herokuapp.com/v1/next -H "Authorization: Bearer <%= @new_token %>"</td>
+      </tr>
+      <tr>
+        <th scope="row">Get the current integer:</th>
+        <td>curl https://cherry-sundae-20794.herokuapp.com/v1/current -H "Authorization: Bearer <%= @new_token %>"</td>
+      </tr>
+      <tr>
+        <th scope="row">Reset the current integer:</th>
+        <td>curl -X PUT https://cherry-sundae-20794.herokuapp.com/v1/current -H "Authorization: Bearer <%= @new_token %>" --header 'Content-Type: application/json' --data-raw '{"data": {"current" : "1000"}}'</td>
+      </tr>
+    </tbody>
+  </table>
+  <p></p>
+  Use this token at the authorization header of each API request.
+  Follows a list of your avaliable endpoints
+
+  
+  <p></p>
+  <h2>
+  <%= link_to "Logout", destroy_user_session_path, method: :delete %>
+  </h2>
+<% end %>

@@ -23,6 +23,9 @@ gem 'devise'
 gem 'jwt'
 gem 'rack-cors'
 
+#facebook auth
+gem 'omniauth-facebook'
+
 # Better debug even in production
 gem 'pry-rails'
 
