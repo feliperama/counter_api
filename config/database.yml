@@ -57,7 +57,6 @@ test:
 #     url: <%= ENV['DATABASE_URL'] %>
 #
 production:
-  <<: *default
-  database: counter_api_production
-  username: counter_api
-  password: <%= ENV['MYAPP_DATABASE_PASSWORD'] %>
+  adapter: postgresql
+  encoding: unicode
+  url: <%= ENV['DATABASE_URL'] %>

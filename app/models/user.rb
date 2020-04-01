@@ -15,7 +15,7 @@ class User < ApplicationRecord
     end
 
     def decode_token(token)
-      JWT.decode(token, ENV['JWT_SECRET'], true, algorithm: 'HS256').first
+      JWT.decode(token, ENV['SECRET_KEY_BASE'], true, algorithm: 'HS256').first
     end
 
     alias find_by_token by_token
@@ -26,6 +26,6 @@ class User < ApplicationRecord
       user_id: id,
       expires_at: 1.week.from_now
     }
-    JWT.encode payload, ENV['JWT_SECRET'], 'HS256'
+    JWT.encode payload, ENV['SECRET_KEY_BASE'], 'HS256'
   end
 end
