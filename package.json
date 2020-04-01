@@ -1,5 +1,5 @@
 {
-  "name": "myapp",
+  "name": "counter_api",
   "private": true,
   "dependencies": {}
 }
