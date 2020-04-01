@@ -10,10 +10,15 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_03_30_032212) do
+ActiveRecord::Schema.define(version: 2020_03_31_223423) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "global_counters", force: :cascade do |t|
+    t.string "name", null: false
+    t.integer "value", default: 0
+  end
 
   create_table "users", force: :cascade do |t|
     t.string "email", default: "", null: false
