@@ -1,0 +1,57 @@
+version: '3'
+services:
+  postgres:
+    restart: always
+    image: postgres
+    volumes:
+      - postgres:/var/lib/postgresql/data
+    environment:         
+      - POSTGRES_PASSWORD=postgres
+    networks:
+      vpcbr:
+        ipv4_address: 10.5.0.5
+
+  nginx: 
+    image: nginx:latest
+    container_name: production_nginx
+    volumes:
+      - ./nginx.conf:/etc/nginx/nginx.conf
+    ports:
+      - "80:80"
+    networks:
+      vpcbr:
+        ipv4_address: 10.5.0.6
+
+  web1:
+    build: .
+    volumes:
+      - .:/myapp
+    depends_on:
+      - postgres
+    environment:         
+      - RAILS_ENV=development
+    networks:
+      vpcbr:
+        ipv4_address: 10.5.0.7
+
+  web2:
+    build: .
+    volumes:
+      - .:/myapp
+    depends_on:
+      - postgres
+    environment:
+      - RAILS_ENV=development
+    networks:
+      vpcbr:
+        ipv4_address: 10.5.0.8
+
+volumes:
+  postgres:
+
+networks:
+  vpcbr:
+    driver: bridge
+    ipam:
+     config:
+       - subnet: 10.5.0.0/16
