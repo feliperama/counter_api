@@ -12,13 +12,21 @@ I expended 7 hours approximately.
 ### Assumptions made
 The main assumption is that the current_int is a Global Counter. This means that any user of the api which makes changes at this counter will be perceived by any other user.
 
+The UI for this API will have the following features:
+* Sign up: For any user of the API/UI is necessary to register to be able to get tokens to use the API.
+* Sign in: When the user is sign in at the UI it will be redirect to a page with the Token to use the API and with a list of all CURL commands possible to be used.
+* Each API token expires after 1 week.
+
 ### Shortcuts/Compromises made
-On the API side, on the session controller, I made a simple signin where the consumers (frontend, curl commands) send a plain text email and password in a json payload for authentication. This was made to not overcomplicate the client, but is NOT product ready. For me, the best way to do this would be using something like a digest authentication, or at least a basic http authentication. 
+On the API side, on the session controller, I made signin where the consumers (frontend, curl commands) send their email and password in a json payload for authentication. This was made to not overcomplicate the client, but is NOT product ready. For me, the best way to do this would be using something like a digest authentication, or at least a basic http authentication. 
+
+Also note that there is a .env in the source code. I had to let there to make possible to test Facebook login locally on Docker, but I would never let any secret key in a source code in a real world scenario.
 
 ### Stretch goals attempted
 I tried all the stretched goals, as also added a new one that I think is important:
 1. _"Build a UI for the service, especially the account creation functionality."_
     * I made this integrated in the same rails application, so I could reuse the authentication functionalities in both API and UI.
+    * Added bootstrap to improve the design and also to improve any new page for the application in the future.
     * When you open the app link, you will be requested to sign_up or sign_in.
     * When you are sign_in, it will be prompeted a page showing your email, the Token to be used in your API requests and also the curl commands to facilitate your tests.
 2. _"Allow sign up using OAuth"_
@@ -37,9 +45,10 @@ TIP when facebook/devise/heroku errors: 2h of the 7h of this task was trying to 
 
 ### Instructions to run assignment locally
 The application is deployed at heroku, but if you want to run it locally you just need to:
-##DOCKER (recommended)
+###### DOCKER (recommended)
 1. Have Docker and Docker Compose installed.
    * I recommend download and install this https://hub.docker.com/editions/community/docker-ce-desktop-mac
+   * Check if it's installed with the commands _docker --version_ and _docker-compose --version_
 3. Clone the repository and enter in the project directory:
    * git clone https://github.com/feliperama/counter_api.git
    * cd counter_api
@@ -48,7 +57,9 @@ The application is deployed at heroku, but if you want to run it locally you jus
 3. DONE! you already have a setup with nginx, two api servers and a postgres database running on your machine! It's on your localhost:80 Just open your browser and type:
    * http://localhost
 ### What did you not include in your solution that you want us to know about?
-More than the shortcuts, I would like to make a React.js frontend for this, but I run out of the time after configuring the facebook omniauth and docker redundancy. I know it was not mandatory but I would like to have a better separation between frontend and backend. Probably I will try it later.
+More than the shortcuts, I would like to make a React.js frontend for this, but I run out of the time after configuring the facebook omniauth and docker redundancy. I really didn't want to extend for much more than 7 hours as was requested to fair with the process. I know it was not mandatory but I would like to have a better separation between frontend and backend. I will surely do it later!
+
+I also would like to use the Activeadmin gem instead of Devise for the user creation, it would be nice to have more control over the users which use the API. However it would overcomplicate the user creation once you also will need a admin account to test, so I decided to let this out of the solution for now.
 
 ### Other information about your submission that you feel it's important that we know if applicable.
 Just some highlights on things that are interesting from the technical point of view:
@@ -56,5 +67,4 @@ Just some highlights on things that are interesting from the technical point of 
 * The secret keys for facebook was configured in environment variables and away from the code. I set different keys for production and development.
 
 ### Your feedback on this technical challenge
-I really enjoy this technical challenge, honestly I prefer this over any typical leetcode challenge. It was simple but involves many components and real work. I made a little extension to use docker/nginx because I just felt that it is important to be worried about redundancy when you are doing an application to be production ready. However, I don't think it's necessary to include something like this in the stretched goals.
-
+I really enjoyed this technical challenge, honestly I prefer this over any typical leetcode challenge. It was simple but involves many components and real work. I also added docker/nginx because I just felt that it is important to be worried about redundancy when you are doing an application to be production ready. However, I don't think it's necessary to include something like this in the stretched goals.
