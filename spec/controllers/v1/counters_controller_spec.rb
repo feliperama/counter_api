@@ -7,7 +7,7 @@ RSpec.describe V1::CountersController, type: :request do
   let(:authenticated_headers) { { 'Authorization': "Bearer #{secret_key}" } }
 
   before do
-    host! 'thinkfic.example.com'
+    host! 'test.example.com'
   end
 
   describe 'GET /v1/next' do

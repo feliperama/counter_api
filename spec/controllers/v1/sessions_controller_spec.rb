@@ -4,7 +4,7 @@ RSpec.describe V1::SessionsController, type: :request do
   let(:user) { create(:user) }
 
   before do
-    host! 'thinkfic.example.com'
+    host! 'test.example.com'
   end
 
   describe "POST /v1/sessions" do

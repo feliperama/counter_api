@@ -2,7 +2,7 @@ require 'rails_helper'
 
 RSpec.describe PagesController, type: :request do
   before do
-    host! 'thinkfic.example.com'
+    host! 'test.example.com'
   end
 
   describe "GET /" do
