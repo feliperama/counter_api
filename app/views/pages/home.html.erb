@@ -31,19 +31,25 @@
       </tr>
       <tr>
         <th scope="row">Get the next integer in the sequence:</th>
-        <td>curl https://cherry-sundae-20794.herokuapp.com/v1/next -H "Authorization: Bearer <%= @new_token %>"</td>
+        <td>curl <%= @curl_base_path %>/v1/next -H "Authorization: Bearer <%= @new_token %>"</td>
       </tr>
       <tr>
         <th scope="row">Get the current integer:</th>
-        <td>curl https://cherry-sundae-20794.herokuapp.com/v1/current -H "Authorization: Bearer <%= @new_token %>"</td>
+        <td>curl <%= @curl_base_path %>/v1/current -H "Authorization: Bearer <%= @new_token %>"</td>
       </tr>
       <tr>
         <th scope="row">Reset the current integer:</th>
-        <td>curl -X PUT https://cherry-sundae-20794.herokuapp.com/v1/current -H "Authorization: Bearer <%= @new_token %>" --header 'Content-Type: application/json' --data-raw '{"data": {"current" : "1000"}}'</td>
+        <td>curl -X PUT <%= @curl_base_path %>/v1/current -H "Authorization: Bearer <%= @new_token %>" --header 'Content-Type: application/json' --data-raw '{"data": {"current" : "1000"}}'</td>
+      </tr>
+      <tr>
+        <th scope="row">SIGN IN to get a new token (replace your email and password!)</th>
+        <td>curl -X POST '<%= @curl_base_path %>/v1/sessions/?email=user1@test.com&password=12341234' --header 'Content-Type: application/json' --data-raw '{"email": "user1@test.com", "password": "12341234"}'
       </tr>
     </tbody>
   </table>
   <p></p>
+  <p></p>
+
   Use this token at the authorization header of each API request.
   Follows a list of your avaliable endpoints
 
