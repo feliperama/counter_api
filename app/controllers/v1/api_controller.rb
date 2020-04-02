@@ -7,6 +7,8 @@ class V1::ApiController < ActionController::Base
 
   def authenticate_user!(options = {})
     head :unauthorized unless current_user
+  rescue
+    head :unauthorized
   end
 
   def current_user
