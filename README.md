@@ -40,7 +40,10 @@ The application is deployed at heroku, but if you want to run it locally you jus
 ##DOCKER (recommended)
 1. Have Docker and Docker Compose installed.
    * I recommend download and install this https://hub.docker.com/editions/community/docker-ce-desktop-mac
-2. Just run the command below. It will build and will run locally
+3. Clone the repository and enter in the project directory:
+   * git clone https://github.com/feliperama/counter_api.git
+   * cd counter_api
+2. Just run the command below (make sure you have docker-compose installed using _docker-compose --version_ at terminal first)
    * docker-compose up --build
 3. DONE! you already have a setup with nginx, two api servers and a postgres database running on your machine! It's on your localhost:80 Just open your browser and type:
    * http://localhost
