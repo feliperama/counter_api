@@ -23,6 +23,14 @@ gem 'devise'
 gem 'jwt'
 gem 'rack-cors'
 
+# Better debug even in production
+gem 'pry-rails'
+
+# Bootstrap
+gem 'bootstrap-sass', '~> 3.4.1'
+gem 'sassc-rails', '>= 2.1.0'
+gem 'jquery-rails'
+
 # Requests
 gem 'http'
 gem 'httparty'
@@ -68,7 +76,6 @@ group :development do
   gem 'annotate'
   gem 'better_errors'
   gem 'rails_layout'
-  gem 'pry-rails'
 end
 
 group :test do
